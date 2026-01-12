@@ -10,8 +10,12 @@ SELECT * FROM utilisateur WHERE nom LIKE 'EL%';
 SELECT * FROM article WHERE id_utilisateur = 100 ORDER BY date_pub ASC;
 
 -- Afficher les articles publiés le mois dernier
-SELECT * FROM article 
-WHERE date_pub >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND statu = 'publier';
+SELECT *
+FROM article
+WHERE MONTH(date_pub) = MONTH(CURDATE() - INTERVAL 1 MONTH)
+  AND YEAR(date_pub) = YEAR(CURDATE() - INTERVAL 1 MONTH)
+  AND statu = 'publier';
+
 
 -- Afficher tous les articles postés aujourd'hui
 SELECT * FROM article WHERE date_pub = CURDATE();
